@@ -1,4 +1,4 @@
-﻿namespace glossary
+﻿namespace Glossary
 {
     public class GlossaryItem
     {

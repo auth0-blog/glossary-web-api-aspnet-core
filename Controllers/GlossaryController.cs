@@ -4,7 +4,7 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace glossary.Controllers
+namespace Glossary.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
