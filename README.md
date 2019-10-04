@@ -1,5 +1,7 @@
 This repository contains a basic glossary Web API implemented in ASP.NET Core 3.0 and secured with [Auth0](https://auth0.com/).
 
+The following article describes the implementation details: [Building and Securing Web APIs with ASP.NET Core 3.0](https://auth0.com/blog/building-and-securing-web-apis-with-aspnet-core-3/)
+
 ## To run this:
 
 1. Clone the repo: `git clone https://github.com/auth0-blog/glossary-web-api-aspnet-core.git`
