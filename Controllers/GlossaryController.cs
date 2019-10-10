@@ -8,7 +8,7 @@ namespace Glossary.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GlossaryController: ControllerBase
+    public class GlossaryController : ControllerBase
     {
         private static List<GlossaryItem> Glossary = new List<GlossaryItem> {
             new GlossaryItem
@@ -45,7 +45,8 @@ namespace Glossary.Controllers
             if (glossaryItem == null)
             {
                 return NotFound();
-            } else
+            }
+            else
             {
                 return Ok(glossaryItem);
             }
@@ -80,7 +81,8 @@ namespace Glossary.Controllers
             if (existingGlossaryItem == null)
             {
                 return BadRequest("Cannot update a nont existing term.");
-            } else
+            }
+            else
             {
                 existingGlossaryItem.Definition = glossaryItem.Definition;
                 return Ok();
