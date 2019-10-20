@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +9,7 @@ namespace Glossary.Controllers
     [Route("api/[controller]")]
     public class GlossaryController : ControllerBase
     {
-        private static List<GlossaryItem> Glossary = new List<GlossaryItem> {
+        private static readonly List<GlossaryItem> Glossary = new List<GlossaryItem> {
             new GlossaryItem
             {
                 Term= "Access Token",
@@ -46,10 +45,8 @@ namespace Glossary.Controllers
             {
                 return NotFound();
             }
-            else
-            {
-                return Ok(glossaryItem);
-            }
+
+            return Ok(glossaryItem);
         }
 
         [HttpPost]
@@ -63,12 +60,9 @@ namespace Glossary.Controllers
             {
                 return Conflict("Cannot create the term because it already exists.");
             }
-            else
-            {
-                Glossary.Add(glossaryItem);
-                var resourceUrl = Path.Combine(Request.Path.ToString(), Uri.EscapeUriString(glossaryItem.Term));
-                return Created(resourceUrl, glossaryItem);
-            }
+
+            Glossary.Add(glossaryItem);
+            return CreatedAtAction(nameof(Get), new { term = glossaryItem.Term }, glossaryItem);
         }
 
         [HttpPut]
@@ -80,13 +74,12 @@ namespace Glossary.Controllers
 
             if (existingGlossaryItem == null)
             {
-                return BadRequest("Cannot update a nont existing term.");
+                return BadRequest("Cannot update a non-existent term.");
             }
-            else
-            {
-                existingGlossaryItem.Definition = glossaryItem.Definition;
-                return Ok();
-            }
+
+            existingGlossaryItem.Definition = glossaryItem.Definition;
+            return Ok();
+
         }
 
         [HttpDelete]
@@ -101,11 +94,9 @@ namespace Glossary.Controllers
             {
                 return NotFound();
             }
-            else
-            {
-                Glossary.Remove(glossaryItem);
-                return NoContent();
-            }
+
+            Glossary.Remove(glossaryItem);
+            return NoContent();
         }
     }
 }
