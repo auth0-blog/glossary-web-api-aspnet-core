@@ -66,8 +66,7 @@ namespace Glossary.Controllers
             else
             {
                 Glossary.Add(glossaryItem);
-                var resourceUrl = Path.Combine(Request.Path.ToString(), Uri.EscapeUriString(glossaryItem.Term));
-                return Created(resourceUrl, glossaryItem);
+                return CreatedAtAction(nameof(Get), new { term = glossaryItem.Term }, glossaryItem);
             }
         }
 
